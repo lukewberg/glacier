@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1007956097562-gn0ba2d32v63uqb8n1etrls8sbt20n4e</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDju_CiP5bhgx1iu-I0wCUDpNDOQAvRWvY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1007956097562</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lukewberg.glacier</string>
+	<key>PROJECT_ID</key>
+	<string>glacier-messenger</string>
+	<key>STORAGE_BUCKET</key>
+	<string>glacier-messenger.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1007956097562:ios:5eda6a85dba8643c7e2fa3</string>
+	<key>DATABASE_URL</key>
+	<string>https://glacier-messenger.firebaseio.com</string>
+</dict>
+</plist>
