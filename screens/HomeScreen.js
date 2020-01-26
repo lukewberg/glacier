@@ -8,6 +8,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from "react-native-modal";
 import Card from '../components/Card';
 import ButtonPrimary from '../components/ButtonPrimary';
+import { firebase } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export default HomeScreen = (props) => {
 
@@ -17,19 +19,29 @@ export default HomeScreen = (props) => {
     const [email, setEmail] = useState();
     const [newMessage, setNewMessage] = useState();
 
-    useEffect(
-        () => {
-            firebase.getThreadsRef().then((threads) => {
-                setThreads(threads)
-                threads.forEach( (thread, index) => {
-                    firebase.getLatestMessage(thread, 1).then( (message) => {
-                        message.id = Math.random().toString();
-                        setMessages([...messages, message])
-                    })
+    useEffect(() => {
+        const unsubscribeThreads = firestore().collection('users').doc(firebase.auth().currentUser.uid).onSnapshot((querySnapshot) => {
+            getThreads()
+        })
+
+        return () => {
+            unsubscribeThreads()
+        }
+    }, [])
+
+
+    const getThreads = () => {
+        Firebase.getThreadsRef().then((threads) => {
+            setThreads(threads)
+            console.log('getting new threads')
+            threads.forEach((thread, index) => {
+                Firebase.getLatestMessage(thread, 1).then((message) => {
+                    message.id = Math.random().toString();
+                    setMessages([...messages, message])
                 })
             })
-            //firebase.sendMessage('nAcPz2Hd0srviGWDTQza', 'hello world')
-        }, [])
+        })
+    }
 
     const newThreadEmailHandler = (email) => {
         setEmail(email)
@@ -40,12 +52,12 @@ export default HomeScreen = (props) => {
     }
 
     const createNewThread = () => {
-        firebase.startNewThread(email, newMessage).then(() => {
+        Firebase.startNewThread(email, newMessage).then(() => {
             setModalVisible(false)
         })
     }
 
-    const firebase = new firebaseAPI();
+    const Firebase = new firebaseAPI();
 
     return (
         <View style={styles.container}>
@@ -58,21 +70,21 @@ export default HomeScreen = (props) => {
                 <Card>
                     <Text style={styles.modalText}>New thread</Text>
                     <View style={styles.modalTextEntryView}>
-                        <TextInput onChangeText={newThreadEmailHandler} style={styles.modalTextEntry} keyboardType='email-address' autoCapitalize='none' autoCorrect={false} placeholder="User's email..."/>
+                        <TextInput onChangeText={newThreadEmailHandler} style={styles.modalTextEntry} keyboardType='email-address' autoCapitalize='none' autoCorrect={false} placeholder="User's email..." />
                     </View>
                     <View style={styles.modalTextEntryView}>
                         <TextInput onChangeText={newThreadMessageHandler} style={styles.modalTextEntry} placeholder="Your message..." />
                     </View>
-                    <ButtonPrimary title='Create' onPress={createNewThread}/>
+                    <ButtonPrimary title='Create' onPress={createNewThread} />
                 </Card>
             </Modal>
-            <FlatList style={styles.threadList} data={threads} renderItem={ (itemData) => (
-                <ThreadItem navigation={props.navigation} firebase={firebase} threadRef={itemData.item}/>
-            )}/>
+            <FlatList style={styles.threadList} data={threads} renderItem={(itemData) => (
+                <ThreadItem navigation={props.navigation} firebase={Firebase} threadRef={itemData.item} />
+            )} />
             <TouchableOpacity onPress={() => {
                 setModalVisible(true)
             }} style={styles.addButton}>
-                <Icon name='ios-add' color='white' size={70} style={{ textAlign: 'center', textAlignVertical: 'bottom', width: 70, height: 70 }}/>
+                <Icon name='ios-add' color='white' size={70} style={{ textAlign: 'center', textAlignVertical: 'bottom', width: 70, height: 70 }} />
             </TouchableOpacity>
         </View>
     );
