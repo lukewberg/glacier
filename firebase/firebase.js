@@ -8,11 +8,21 @@ export default class Firestore {
         this.bootstrap()
     }
 
+    signOut = () => {
+        return new Promise((resolve, reject) => {
+            firebase.auth().signOut().then(() => {
+                resolve()
+            }).catch((error) => {
+                reject(Error)
+            })
+        })
+    }
+
     getThreadUser = (thread) => {
         return new Promise((resolve, reject) => {
             thread.get().then((doc) => {
                 doc.data().members.forEach((member) => {
-                    if (member.id !== firebase.auth().currentUser.uid){
+                    if (member.id !== firebase.auth().currentUser.uid) {
                         member.get().then((doc) => {
                             resolve(doc.data())
                         })
@@ -62,8 +72,8 @@ export default class Firestore {
             this.getThreadsRef().then((threadRefs) => {
                 threadRefs.forEach((thread) => {
                     thread.get().then((doc) => {
-                            threads.push(doc.data())
-                        })
+                        threads.push(doc.data())
+                    })
                         .catch((error) => {
                             reject(error)
                         })
@@ -79,19 +89,19 @@ export default class Firestore {
         return new Promise((resolve, reject) => {
             const threads = [];
             firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then((doc) => {
-                    const loop = new Promise((resolve, reject) => {
-                        doc.data().threads.forEach((thread, index) => {
-                            threads.push(thread)
-                            if (threads.length === doc.data().threads.length) {
-                                resolve(threads)
-                            }
-                        })
-                    })
-
-                    loop.then(() => {
-                        resolve(threads)
+                const loop = new Promise((resolve, reject) => {
+                    doc.data().threads.forEach((thread, index) => {
+                        threads.push(thread)
+                        if (threads.length === doc.data().threads.length) {
+                            resolve(threads)
+                        }
                     })
                 })
+
+                loop.then(() => {
+                    resolve(threads)
+                })
+            })
                 .catch((error) => {
                     reject(error)
                 })
@@ -114,10 +124,10 @@ export default class Firestore {
         return new Promise((resolve, reject) => {
             const currentUserUID = firebase.auth().currentUser.uid;
             firestore().collection('threads').doc(threadID).collection('messages').add({
-                    author: currentUserUID,
-                    message: message,
-                    timeStamp: firestore.Timestamp.now()
-                }).then(resolve())
+                author: currentUserUID,
+                message: message,
+                timeStamp: firestore.Timestamp.now()
+            }).then(resolve())
                 .catch((error) => {
                     reject(error)
                 })

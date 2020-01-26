@@ -61,8 +61,18 @@ export default HomeScreen = (props) => {
 
     return (
         <View style={styles.container}>
-            <Header>
+            <Header style={{ paddingHorizontal: 25 }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        Firebase.signOut().then(() => {
+                            props.navigation.navigate('Login');
+                        })
+                    }}
+                    style={{ zIndex: 1, justifyContent: 'center', alignItems: 'center', width: 50, height: 50 }}>
+                    <Icon name='ios-log-out' size={50} color='white' />
+                </TouchableOpacity>
                 <Text style={{ flex: 1, fontSize: 30, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Chats</Text>
+                <View style={{ width: 50, height: 50 }}></View>
             </Header>
             <Modal avoidKeyboard={true} onBackdropPress={() => {
                 setModalVisible(false)
