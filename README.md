@@ -1,6 +1,4 @@
 ![Glacier](banner.png)
-
-# **GLACIER MESSENGER**
 ## **Features**
 Glacier Messenger is an instant messenging app that is minimal in appearance and features, perfect for domonstration! Sign in with your Google account to get started, there's nothing to it!
 ---
