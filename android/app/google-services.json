@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1007956097562",
+    "firebase_url": "https://glacier-messenger.firebaseio.com",
+    "project_id": "glacier-messenger",
+    "storage_bucket": "glacier-messenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007956097562:android:65ad994529f7d6df7e2fa3",
+        "android_client_info": {
+          "package_name": "com.lukewberg.glacier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007956097562-hm2fk2mpsa5ivom0dk166o5qodc5ioa3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lukewberg.glacier",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1007956097562-03alomjsr5s1d3eovk8mfqor0v48a5e0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6rVRknjzErS_P0eMWVMW2eWADzrHEgwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007956097562-03alomjsr5s1d3eovk8mfqor0v48a5e0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1007956097562-gn0ba2d32v63uqb8n1etrls8sbt20n4e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lukewberg.glacier"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
